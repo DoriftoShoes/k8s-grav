@@ -1,0 +1,15 @@
+#Use the following YAMLs to create a cStor Storage Pool.
+# and associated storage class.
+apiVersion: openebs.io/v1alpha1
+kind: StoragePoolClaim
+metadata:
+  name: k8s-basic
+spec:
+  name: k8s-basic
+  type: disk
+  minPools: 2
+  maxPools: 2
+  poolSpec:
+    poolType: striped
+  disks:
+    diskList:

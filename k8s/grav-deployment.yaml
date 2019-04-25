@@ -1,0 +1,56 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: k8s-grav
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 30Gi
+  storageClassName: openebs-cstor-k8s-basic 
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: k8s-grav
+  name: k8s-grav
+spec:
+  replicas: 1
+  strategy: {}
+  selector:
+    matchLabels:
+      app: k8s-grav
+  template:
+    metadata:
+      labels:
+        app: k8s-grav
+    spec:
+      containers:
+      - image: yobasystems/alpine-grav:latest
+        name: k8s-grav
+        env:
+          - name: VIRTUAL_HOST
+            value: your-domain-name-here.com
+        ports:
+        - containerPort: 80
+          name: http
+        - containerPort: 443
+          name: https
+        resources:
+          requests:
+            cpu: "1.0"
+            memory: "1024Mi"
+          limits:
+            cpu: "1.0"
+            memory: "1024Mi"
+        volumeMounts:
+          - name: "webroot"
+            mountPath: /usr/html/
+      volumes:
+        - name: webroot
+          persistentVolumeClaim:
+            claimName: k8s-grav
+      restartPolicy: Always
+status: {}
