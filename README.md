@@ -7,7 +7,7 @@ Grav is a flat file CMS that makes it a great choice for a personal blog or webs
 Blog link will go here!
 
 ## Who?
-Me.  Patrick Hoolboom aka DoriftoShoes.
+Me.  Patrick Hoolboom aka [DoriftoShoes](https://twitter.com/DoriftoShoes).
 
 This guy here:
 [LinkedIn](https://www.linkedin.com/in/pwhoolboom/)
